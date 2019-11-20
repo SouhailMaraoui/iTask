@@ -1,4 +1,4 @@
-package com.example.itask.Profile;
+package com.example.itask.View.Profile;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

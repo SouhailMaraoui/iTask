@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.itask" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.todotest">
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/icon"
+        android:label="iTask"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name=".View.Welcome.WelcomeView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        <activity android:name=".View.Session.Login" />
+        <activity android:name=".View.Session.Signup" />
+        <activity android:name=".Home" />
+        <activity android:name=".Controller.alarm.NotificationActivity" />
+        <receiver android:name=".Controller.alarm.AlarmReceiver"/>
 
+    </application>
 </manifest>

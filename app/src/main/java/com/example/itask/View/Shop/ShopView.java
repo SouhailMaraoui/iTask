@@ -1,4 +1,4 @@
-package com.example.itask.Shop;
+package com.example.itask.View.Shop;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

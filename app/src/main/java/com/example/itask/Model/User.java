@@ -1,5 +1,11 @@
 package com.example.itask.Model;
 
+import android.content.Context;
+import android.view.Gravity;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -20,7 +26,7 @@ public class User implements Serializable {
     private long spent;
     private long streak;
 
-    public User(String i,String f,String l,String e,long xp, long points,long deletable,long max,long spent,long streak)
+    public User(String i, String f, String l, String e, long xp, long points, long deletable, long max, long spent, long streak)
     {
         this.id=i;
         this.firstname=f;
@@ -101,5 +107,27 @@ public class User implements Serializable {
 
     public void setStreak(long streak) {
         this.streak = streak;
+    }
+
+    public void setAchievement(Context hm, final String achievement, final int level)
+    {
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("AchievementUser").whereEqualTo("userId",id)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for(DocumentSnapshot doc:task.getResult())
+                {
+                    if(doc.getString("achievement").equals(achievement))
+                    {
+                        db.collection("AchievementUser").document(doc.getId()).update("level",level);
+                    }
+                }
+            }
+        });
+
+        Toast toast= Toast.makeText(hm,"Congratulation! you unlocked '"+achievement+"' level "+level,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP,0,0);
+        toast.show();
     }
 }
